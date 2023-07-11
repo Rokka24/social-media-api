@@ -28,7 +28,6 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
     private final UserMapper userMapper;
 
-
     @Transactional(readOnly = true)
     public List<UserCollectionDto> findAllUsers(int limit) {
         PageRequest pageRequest = PageRequest.of(0, limit);

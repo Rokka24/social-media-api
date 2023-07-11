@@ -38,6 +38,8 @@ public class UserDto {
     @ToString.Exclude
     private List<UserCollectionDto> subscribers;
     @ToString.Exclude
+    private List<UserCollectionDto> subscriptions;
+    @ToString.Exclude
     private List<PostDto> posts;
     @ToString.Exclude
     private List<RequestDto> requests;
