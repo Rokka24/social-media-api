@@ -6,6 +6,7 @@ import com.khamzin.socialmediaapi.model.request.Status;
 import com.khamzin.socialmediaapi.model.request.Type;
 import com.khamzin.socialmediaapi.model.user.User;
 import com.khamzin.socialmediaapi.repository.RequestRepository;
+import com.khamzin.socialmediaapi.util.exception.request.RequestNotFoundException;
 import com.khamzin.socialmediaapi.util.mapper.RequestMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -82,13 +83,13 @@ public class RequestService {
     @Transactional(readOnly = true)
     public Request getRequestById(Long id) {
         return requestRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Request not found"));
+                .orElseThrow(() -> new RequestNotFoundException("Request not found"));
     }
 
     @Transactional(readOnly = true)
     public RequestDto getRequestDtoById(Long id) {
         Request request = requestRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Request not found"));
+                .orElseThrow(() -> new RequestNotFoundException("Request not found"));
         return requestMapper.map(request);
     }
 }

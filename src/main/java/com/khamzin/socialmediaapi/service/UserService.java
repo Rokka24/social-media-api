@@ -54,7 +54,6 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public UserDto getUserInfo(Long userId) {
-        log.info("get user by id in UserService");
         return userRepository.findById(userId)
                 .map(userMapper::map)
                 .orElseThrow(() -> new AuthException("Can't show a user info", "USER_INFO_ERROR"));

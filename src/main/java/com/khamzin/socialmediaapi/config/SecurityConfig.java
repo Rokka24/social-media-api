@@ -23,7 +23,19 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableMethodSecurity()
 public class SecurityConfig {
 
-    private final String[] publicRoutes = {"/api/auth/register", "/api/auth/login"};
+    private final String[] publicRoutes = {
+            "/api/auth/register",
+            "/api/auth/login",
+            "/swagger-ui.html",
+            "/webjars/**",
+            "/swagger-ui/**",
+            "/configuration/security",
+            "/configuration/ui",
+            "/swagger-resources",
+            "/swagger-resources/**",
+            "/v2/api-docs",
+            "/v3/api-docs",
+            "/v3/api-docs/**"};
     private final PasswordEncoder passwordEncoder;
     private final JwtAuthFilter jwtAuthFilter;
     @Qualifier(value = "userDetailsServiceImpl")
