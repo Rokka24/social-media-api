@@ -73,4 +73,9 @@ public class PostService {
         List<Post> posts = postRepository.findPostsForFeedByUserIdWithPaginationAndSortingByCreation(userId, pageNumber, pageSize);
         return postMapper.map(posts);
     }
+
+    @Transactional
+    public void deletePostById(Long postId) {
+        postRepository.delete(getPostById(postId));
+    }
 }

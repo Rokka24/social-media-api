@@ -77,6 +77,10 @@ public class PostController {
                             responseCode = "200"
                     ),
                     @ApiResponse(
+                            description = "Post not found",
+                            responseCode = "404"
+                    ),
+                    @ApiResponse(
                             description = "Validation error",
                             responseCode = "400"
                     ),
@@ -95,5 +99,27 @@ public class PostController {
 
         PostDto updatedPost = postService.updatePost(postId, postDto);
         return new ResponseEntity<>(updatedPost, HttpStatus.OK);
+    }
+
+    @Operation(description = "Endpoint for removing the post",
+            responses = {
+                    @ApiResponse(
+                            description = "Success",
+                            responseCode = "200"
+                    ),
+                    @ApiResponse(
+                            description = "Post not found",
+                            responseCode = "404"
+                    ),
+                    @ApiResponse(
+                            description = "Unauthorized / Invalid token",
+                            responseCode = "401"
+                    )
+            })
+    @DeleteMapping("{postId}")
+    public ResponseEntity<?> deletePost(@PathVariable Long postId) {
+        postService.deletePostById(postId);
+
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
