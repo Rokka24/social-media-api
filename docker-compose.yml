@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  postgres-social-media-api:
+    container_name: postgres-social-media-api
+    image: 'postgres:15.2'
+    environment:
+      POSTGRES_DB: social_media_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: pass
+      PGDATA: /data/postgres
+    volumes:
+      - ./db-data/postgres:/data/postgres
+    expose:
+      - "5427"
+    ports:
+      - "5427:5427"
+    command: -p 5427
+    restart: always
+
+  app:
+    image: 'social-media-api:1.0.0'
+    container_name: 'social-media-api'
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres-social-media-api
+    ports:
+      - "8080:8080"
